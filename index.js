@@ -40,8 +40,47 @@ const proxyOptions = {
       // Convert to string if it's HTML
       if (contentType && contentType.includes('text/html')) {
         body = body.toString('utf8');
-        // Add div before closing body tag
-        body = body.replace('</body>', '<div id="proxy-injected"><h1>Proxied by Freshwater Futures</h1></div></body>');
+
+        // Check if this is the claims page
+        if (req.url.includes('how-to-make-a-claim')) {
+          // Define the button HTML with styles
+          const buttonHtml = `
+            <div style="
+              margin: 20px 0;
+              padding: 20px;
+              background-color: #f8f9fa;
+              border-radius: 8px;
+              text-align: center;
+            ">
+              <button onclick="initiateClaimProcess()" style="
+                padding: 15px 30px;
+                font-size: 24px;
+                font-weight: bold;
+                color: white;
+                background-color: #007bff;
+                border: none;
+                border-radius: 8px;
+                cursor: pointer;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+                transition: all 0.3s ease;
+              ">
+                Initiate Claim
+              </button>
+            </div>
+            <script>
+              function initiateClaimProcess() {
+                alert('Initiating claim process...');
+                // Add your claim process logic here
+              }
+            </script>
+          `;
+
+          // Insert the button after any opening tag with id="main"
+          body = body.replace(
+            /<[^>]+\bid="main"[^>]*>/i,
+            match => `${match}${buttonHtml}`
+          );
+        }
       }
 
       // Set appropriate headers
