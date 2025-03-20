@@ -46,20 +46,7 @@ const proxyOptions = {
           // Replace the death claim link with our custom button
           body = body.replace(
             /<a[^>]*death-insurance-claim-factsheet\.ashx[^>]*>Making a death claim<\/a>/i,
-            `<a href="https://platform.freshwaterfutures.com/" 
-                style="
-                  display: inline-block;
-                  padding: 10px 20px;
-                  font-size: 16px;
-                  font-weight: bold;
-                  color: white;
-                  background-color: #007bff;
-                  border-radius: 4px;
-                  text-decoration: none;
-                  transition: all 0.3s ease;
-                "
-                onmouseover="this.style.backgroundColor='#0056b3'"
-                onmouseout="this.style.backgroundColor='#007bff'"
+            `<a href="https://platform.freshwaterfutures.com/" class="cta-is-small"                
             >✨ Initiate a Claim ✨</a>`
           );
         }
