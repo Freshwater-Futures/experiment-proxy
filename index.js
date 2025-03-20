@@ -43,42 +43,24 @@ const proxyOptions = {
 
         // Check if this is the claims page
         if (req.url.includes('how-to-make-a-claim')) {
-          // Define the button HTML with styles
-          const buttonHtml = `
-            <div style="
-              margin: 20px 0;
-              padding: 20px;
-              background-color: #f8f9fa;
-              border-radius: 8px;
-              text-align: center;
-            ">
-              <button onclick="initiateClaimProcess()" style="
-                padding: 15px 30px;
-                font-size: 24px;
-                font-weight: bold;
-                color: white;
-                background-color: #007bff;
-                border: none;
-                border-radius: 8px;
-                cursor: pointer;
-                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-                transition: all 0.3s ease;
-              ">
-                Initiate Claim
-              </button>
-            </div>
-            <script>
-              function initiateClaimProcess() {
-                alert('Initiating claim process...');
-                // Add your claim process logic here
-              }
-            </script>
-          `;
-
-          // Insert the button after any opening tag with id="main"
+          // Replace the death claim link with our custom button
           body = body.replace(
-            /<[^>]+\bid="main"[^>]*>/i,
-            match => `${match}${buttonHtml}`
+            /<a[^>]*death-insurance-claim-factsheet\.ashx[^>]*>Making a death claim<\/a>/i,
+            `<a href="https://platform.freshwaterfutures.com/" 
+                style="
+                  display: inline-block;
+                  padding: 10px 20px;
+                  font-size: 16px;
+                  font-weight: bold;
+                  color: white;
+                  background-color: #007bff;
+                  border-radius: 4px;
+                  text-decoration: none;
+                  transition: all 0.3s ease;
+                "
+                onmouseover="this.style.backgroundColor='#0056b3'"
+                onmouseout="this.style.backgroundColor='#007bff'"
+            >✨ Initiate a Claim ✨</a>`
           );
         }
       }
